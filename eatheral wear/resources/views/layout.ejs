@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ethereal Wear</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Line Awesome Icons -->
+    <link rel="stylesheet"
+        href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/app.css">
+    
+</head>
+
+<body class="bg-gradient-to-r from-blue-100 to-purple-200">
+    <!-- Top Bar -->
+    <div class="top-bar container mx-auto flex items-center justify-between py-4">
+        <a href="/">
+            <img src="/img/l.png" alt="logo" class="h-16 w-auto inline-block">
+        </a>
+        <div class="flex items-center">
+            <span class="text-xl font-bold ml-2">Ethereal Wear</span>
+        </div>
+        <!-- Search Bar -->
+        <div class="flex-grow mx-4">
+            <input type="text" placeholder="Search for brands, categories, or products" class="w-full p-2 border rounded-lg" />
+        </div>
+    </div>
+
+    <!-- Top Bar with Navigation -->
+    <nav class="container mx-auto flex items-center justify-between py-4">
+        <!-- Navigation Links -->
+        <div class="flex-grow flex justify-center">
+            <ul class="flex items-center space-x-6">
+                <li><a href="/">Home</a></li>
+                <li><a href="#categories">Categories</a></li> <!-- Updated link to use an anchor -->
+                <li><a href="#brands">Brands</a></li>
+                <li><a href="#">Products</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#about">About</a></li>
+            
+                <!-- Conditional Rendering based on User Authentication -->
+                <% if (user) { %>
+                <li>
+                    <form id="logout" action="/logout" method="POST">
+                        <a onclick="document.getElementById('logout').submit()" href="#">Logout</a>
+                    </form>
+                </li>
+                <% } else { %>
+                <li><a href="/register">Register</a></li>
+                <li><a href="/login">Login</a></li>
+                <% } %>
+    
+                <li>
+                    <a href="/cart" class="inline-block px-4 py-2 rounded-full flex items-center">
+                        <span id="cartCounter" class="text-white font-bold pr-2">
+                            <%= session.cart ? session.cart.totalQty : '' %>
+                        </span>
+                        <img src="/img/cart.png" alt="Cart">
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Dynamic Content will be inserted here -->
+    <%- body %>
+
+    <!-- Categories Section -->
+    <div id="categories" class="container mx-auto py-10">
+        <h1 class="text-3xl font-bold text-center mb-6">Categories</h1>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Men Category -->
+            <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                <img src="/img/Men.jpeg" alt="Men's Clothing" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h2 class="text-xl font-semibold">Men</h2>
+                    <p class="text-gray-600">Explore our latest collection of men's clothing and accessories.</p>
+                    <a href="/categories/men" class="mt-2 inline-block text-blue-500">Shop Now</a>
+                </div>
+            </div>
+
+            <!-- Women Category -->
+            <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                <img src="/img/Women.jpeg" alt="Women's Clothing" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h2 class="text-xl font-semibold">Women</h2>
+                    <p class="text-gray-600">Discover stylish women's clothing and accessories.</p>
+                    <a href="/categories/women" class="mt-2 inline-block text-blue-500">Shop Now</a>
+                </div>
+            </div>
+
+            <!-- Kids Category -->
+            <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                <img src="/img/children.jpeg" alt="Kids' Clothing" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h2 class="text-xl font-semibold">Kids</h2>
+                    <p class="text-gray-600">Find fun and fashionable clothing for kids.</p>
+                    <a href="/categories/kids" class="mt-2 inline-block text-blue-500">Shop Now</a>
+                </div>
+            </div>
+
+            <!-- Accessories Category -->
+            <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                <img src="/img/ass.jpeg" alt="Accessories" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h2 class="text-xl font-semibold">Accessories</h2>
+                    <p class="text-gray-600">Complete your outfit with our stylish accessories.</p>
+                    <a href="/categories/accessories" class="mt-2 inline-block text-blue-500">Shop Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Brands Section -->
+    <div id="brands" class="container mx-auto py-10">
+        <h1 class="text-3xl font-bold text-center mb-6">Brands</h1>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+            <!-- Brand 1 -->
+            <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                <img src="/img/a1.jpeg" alt="Brand 1" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h2 class="text-xl font-semibold">Hussain Rehar</h2>
+                    <p class="text-gray-600">Stylish and modern apparel.</p>
+                </div>
+            </div>
+            <!-- Brand 2 -->
+            <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                <img src="/img/a2.jpeg" alt="Brand 2" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h2 class="text-xl font-semibold">Asim Jofa</h2>
+                    <p class="text-gray-600">Trendy fashion for everyone.</p>
+                </div>
+            </div>
+            <!-- Brand 3 -->
+            <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                <img src="/img/a3.jpeg" alt="Brand 3" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h2 class="text-xl font-semibold">Khaadi</h2>
+                    <p class="text-gray-600">Quality clothing for all occasions.</p>
+                </div>
+            </div>
+            <!-- Brand 4 -->
+            <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                <img src="/img/12.webp" alt="Brand 4" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h2 class="text-xl font-semibold">Zellburry</h2>
+                    <p class="text-gray-600">Luxury meets affordability.</p>
+                </div>
+            </div>
+            <!-- Brand 5 -->
+            <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                <img src="/img/13.webp" alt="Brand 5" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h2 class="text-xl font-semibold">Zephyr</h2>
+                    <p class="text-gray-600">Innovative designs for modern lifestyles.</p>
+                </div>
+            </div>
+            <!-- Brand 6 -->
+            <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                <img src="/img/14.webp" alt="Brand 6" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h2 class="text-xl font-semibold">Saphire</h2>
+                    <p class="text-gray-600">Fashion-forward styles for all.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   <!-- About and Contact Sections -->
+<div class="flex flex-wrap bg-white py-10">
+    <!-- About Section -->
+    <div id="about" class="w-full md:w-1/2 px-4">
+        <h1 class="text-3xl font-bold text-center mb-6">About Us</h1>
+        <div class="container mx-auto">
+            <p class="text-gray-600 text-lg">At Ethereal Wear, we believe in providing the best quality clothing and accessories to our customers. Our collections are carefully curated to ensure that you have access to the latest fashion trends at affordable prices. Join us in exploring the world of style and elegance.</p>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <div id="contact" class="w-full md:w-1/2 px-4">
+        <h1 class="text-3xl font-bold text-center mb-6">Contact Us</h1>
+        <div class="container mx-auto">
+            <form class="w-full max-w-lg mx-auto">
+                <div class="flex flex-wrap -mx-3 mb-6">
+                    <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                            First Name
+                        </label>
+                        <input class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                            id="grid-first-name" type="text" placeholder="Jane" />
+                    </div>
+                    <div class="w-full md:w-1/2 px-3">
+                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+                            Last Name
+                        </label>
+                        <input class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
+                            id="grid-last-name" type="text" placeholder="Doe" />
+                    </div>
+                </div>
+                <div class="flex flex-wrap -mx-3 mb-6">
+                    <div class="w-full px-3">
+                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
+                            Email
+                        </label>
+                        <input class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
+                            id="grid-password" type="email" placeholder="email@example.com" />
+                    </div>
+                </div>
+                <div class="flex flex-wrap -mx-3 mb-6">
+                    <div class="w-full px-3">
+                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-message">
+                            Message
+                        </label>
+                        <textarea class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
+                            id="grid-message" placeholder="Your message..." rows="4"></textarea>
+                    </div>
+                </div>
+                <div class="flex flex-wrap -mx-3 mb-2">
+                    <div class="w-full px-3">
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">
+                            Send
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white py-4">
+        <div class="container mx-auto text-center">
+            <p class="text-gray-600">© 2024 Ethereal Wear. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="/js/app.js"></script>
+</body>
+
+</html>
